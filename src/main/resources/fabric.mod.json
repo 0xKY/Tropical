@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "tropical",
+  "version": "${version}",
+  "name": "Tropical",
+  "description": "Minecraft but a lot more tropical",
+  "authors": [
+    "KaloyanKYS"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/tropical/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "me.kaloyankys.tropical.client.TropicalClient"
+    ],
+    "main": [
+      "me.kaloyankys.tropical.Tropical"
+    ]
+  },
+  "mixins": [
+    "tropical.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*",
+    "minecraft": "1.16.5"
+  }
+}

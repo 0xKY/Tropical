@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "tropical:block/tropical_log_top",
+    "side": "tropical:block/tropical_log"
+  }
+}
