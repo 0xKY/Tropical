@@ -14,12 +14,15 @@ import net.minecraft.util.registry.Registry;
 public class ModBlocks {
 
     //Coconut
-    public static final Block COCONUT_SMALL_FRUIT = register("coconut_fruit", new CoconutFruitBlock(FabricBlockSettings.of(Material.GOURD)));
-    public static final Block COCONUT = register("coconut", new CoconutBlock(AbstractBlock.Settings.copy(Blocks.SAND)));
+    public static final Block COCONUT_FRUIT = register("coconut_fruit", new CoconutFruitBlock(FabricBlockSettings.of(Material.GOURD).strength(1.0f).ticksRandomly()));
+    public static final Block COCONUT_FRUIT_GRAVITY = register("coconut_fruit_gravity", new CoconutBlock(FabricBlockSettings.of(Material.GOURD).strength(1.0f)));
+    public static final Block COCONUT = register("coconut", new FallingBlock(FabricBlockSettings.of(Material.GOURD).strength(1.0f)));
+    public static final Block COCONUT_OPEN = register("coconut_open", new CoconutBlock(FabricBlockSettings.of(Material.GOURD).strength(0.8f)));
+    public static final Block COCONUT_OPEN_EMPTY = register("coconut_open_empty", new CoconutBlock(FabricBlockSettings.of(Material.GOURD).strength(0.8f)));
 
     //Tropical Trees
-    public static final Block TROPICAL_WOOD = register("tropical_log", new PillarBlock(FabricBlockSettings.of(Material.WOOD).strength(0.8f)));
-    public static final Block TROPICAL_LEAVES = register("tropical_leaves", new LeavesBlock(FabricBlockSettings.of(Material.LEAVES).strength(0.2f)));
+    public static final Block TROPICAL_LOG = register("tropical_log", new PillarBlock(FabricBlockSettings.of(Material.WOOD).strength(0.8f)));
+    public static final Block COCONUT_LEAVES = register("coconut_leaves", new LeavesBlock(FabricBlockSettings.of(Material.LEAVES).strength(0.2f)));
 
     //Flotsam
     public static final Block FLOTSAM_GRASS = register("flotsam_grass", new FlotsamGrassBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT).strength(0.1f)));

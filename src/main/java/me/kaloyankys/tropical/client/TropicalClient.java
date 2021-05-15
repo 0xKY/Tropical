@@ -12,6 +12,6 @@ public class TropicalClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(),
-                ModBlocks.FLOTSAM_GRASS, ModBlocks.COCONUT, ModBlocks.TROPICAL_LEAVES);
+                ModBlocks.FLOTSAM_GRASS, ModBlocks.COCONUT_OPEN, ModBlocks.COCONUT_LEAVES);
     }
 }
