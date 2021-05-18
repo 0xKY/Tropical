@@ -1,7 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"2": "Downloads/coconut (2)",
+		"2": "tropical:block/coconut_block",
 		"particle": "tropical:block/open_nut"
 	},
 	"elements": [

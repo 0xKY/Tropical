@@ -1,4 +1,4 @@
-package me.kaloyankys.tropical.block;
+package me.kaloyankys.tropical.block.coconut;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -8,8 +8,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 
-public class CoconutBlock extends FallingBlock {
-    public CoconutBlock(Settings settings) {
+public class CoconutEmptyBlock extends FallingBlock {
+    public CoconutEmptyBlock(Settings settings) {
         super(settings);
     }
 

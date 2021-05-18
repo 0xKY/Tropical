@@ -2,6 +2,6 @@
   "variants": {
     "age=0": { "model": "tropical:block/coconut_fruit" },
     "age=1": { "model": "tropical:block/coconut_fruit_ripe" },
-    "age=2": { "model": "tropical:block/coconut" }
+    "age=2": { "model": "tropical:block/coconut_fruit_ripe"}
   }
 }

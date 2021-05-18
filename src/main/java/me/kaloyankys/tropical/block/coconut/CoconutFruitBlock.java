@@ -1,4 +1,4 @@
-package me.kaloyankys.tropical.block;
+package me.kaloyankys.tropical.block.coconut;
 
 import me.kaloyankys.tropical.init.ModBlocks;
 import net.minecraft.block.Block;
@@ -21,7 +21,6 @@ public class CoconutFruitBlock extends Block {
 
     public static final VoxelShape SHAPE = Block.createCuboidShape(4D, 8D, 4D, 12D, 16D, 12D);
     public static final IntProperty AGE = IntProperty.of("age", 0, 2);
-    private int i = 0;
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
@@ -30,14 +29,17 @@ public class CoconutFruitBlock extends Block {
 
     @Override
     public boolean hasRandomTicks(BlockState state) {
-        return (Integer)state.get(AGE) == 0;
+        return (Integer)state.get(AGE) < 3;
     }
 
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if ((Integer)state.get(AGE) > 2) {
-            i++;
-            world.setBlockState(pos, state.with(AGE, i));
+        int i = (Integer)state.get(AGE);
+        if (i < 2 && random.nextInt(100) == 0) {
+            world.setBlockState(pos, (BlockState)state.with(AGE, i + 1), 2);
+        }
+        if (i == 2) {
+            world.setBlockState(pos, (BlockState) ModBlocks.COCONUT_FRUIT_GRAVITY.getDefaultState());
         }
     }
     @Override
