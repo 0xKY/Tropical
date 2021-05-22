@@ -28,7 +28,7 @@ public class ModWorldGen {
     //Trees
     public static final ConfiguredFeature<TreeFeatureConfig, ?> COCONUT_TREE = Feature.TREE.configure((new TreeFeatureConfig.Builder
             (new SimpleBlockStateProvider(ModBlocks.TROPICAL_LOG.getDefaultState()), new SimpleBlockStateProvider(ModBlocks.COCONUT_LEAVES.getDefaultState()),
-                    new LargeOakFoliagePlacer(UniformIntDistribution.of(1), UniformIntDistribution.of(1), 4),
+                    new LargeOakFoliagePlacer(UniformIntDistribution.of(1), UniformIntDistribution.of(2), 4),
                     new LargeOakTrunkPlacer(5, 10, 1),
                     new TwoLayersFeatureSize(2, 0, 0, OptionalInt.of(3))).build()));
 
