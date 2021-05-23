@@ -36,7 +36,7 @@ import java.util.List;
 public class CocoCrabEntity extends AnimalEntity {
     public static final TrackedData<Boolean> EATING = DataTracker.registerData(CocoCrabEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     public static final TrackedData<Boolean> PASSIVE = DataTracker.registerData(CocoCrabEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-    public Ingredient TEMPT_ITEM = Ingredient.ofItems(ModBlocks.COCONUT_FRUIT_GRAVITY);
+    public Ingredient TEMPT_ITEM = Ingredient.ofItems(ModBlocks.COCONUT);
     private AttributeContainer attributeContainer;
     private int eatCooldown = 100;
     public int eatTime = 0;
@@ -48,7 +48,7 @@ public class CocoCrabEntity extends AnimalEntity {
 
     @Override
     protected void initGoals() {
-        TEMPT_ITEM = Ingredient.ofItems(ModBlocks.COCONUT_FRUIT_GRAVITY);
+        TEMPT_ITEM = Ingredient.ofItems(ModBlocks.COCONUT);
 
         this.temptGoal = new TemptGoal(this, 0.7D, TEMPT_ITEM, false);
 
@@ -228,7 +228,7 @@ public class CocoCrabEntity extends AnimalEntity {
             getLookControl().lookAt(targetPos.getX() + 0.5F, targetPos.getY() + 0.5F, targetPos.getZ() + 0.5F);
             {
                 BlockState st = world.getBlockState(targetPos);
-                if(st.isOf(ModBlocks.COCONUT_FRUIT_GRAVITY))
+                if(st.isOf(ModBlocks.COCONUT))
                 {
                     world.breakBlock(targetPos, false);
                     world.setBlockState(targetPos, ModBlocks.COCONUT_OPEN.getDefaultState());
@@ -245,7 +245,7 @@ public class CocoCrabEntity extends AnimalEntity {
         public boolean shouldContinue()
         {
             BlockState st = world.getBlockState(targetPos);
-            if(!st.isOf(ModBlocks.COCONUT_FRUIT_GRAVITY)) return false;
+            if(!st.isOf(ModBlocks.COCONUT)) return false;
 
             return squaredDistanceTo(targetPos.getX() + 0.5F, targetPos.getY() + 0.5F, targetPos.getZ() + 0.5F) <= 2;
         }
@@ -275,7 +275,7 @@ public class CocoCrabEntity extends AnimalEntity {
                 {
                     m.set(x, startPos.getY(), z);
                     BlockState checkState = world.getBlockState(m);
-                    if(checkState.isOf(ModBlocks.COCONUT_FRUIT_GRAVITY))
+                    if(checkState.isOf(ModBlocks.COCONUT))
                     {
                         spots.add(new BlockPos(m.getX(), m.getY(), m.getZ()));
                     }

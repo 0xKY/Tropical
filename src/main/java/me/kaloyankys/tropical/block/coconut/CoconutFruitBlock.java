@@ -39,7 +39,7 @@ public class CoconutFruitBlock extends Block {
             world.setBlockState(pos, (BlockState)state.with(AGE, i + 1), 2);
         }
         if (i == 2) {
-            world.setBlockState(pos, (BlockState) ModBlocks.COCONUT_FRUIT_GRAVITY.getDefaultState());
+            world.setBlockState(pos, (BlockState) ModBlocks.COCONUT.getDefaultState());
         }
     }
     @Override

@@ -20,8 +20,7 @@ public class ModBlocks {
 
     //Coconut
     public static final Block COCONUT_FRUIT = register("coconut_fruit", new CoconutFruitBlock(FabricBlockSettings.of(Material.GOURD).strength(1.0f).ticksRandomly().sounds(BlockSoundGroup.BONE)));
-    public static final Block COCONUT_FRUIT_GRAVITY = register("coconut_fruit_gravity", new CoconutFruitHarvestableBlock(FabricBlockSettings.of(Material.GOURD).strength(1.0f).sounds(BlockSoundGroup.BONE)));
-    public static final Block COCONUT = register("coconut", new CoconutEmptyBlock(FabricBlockSettings.of(Material.GOURD).strength(1.0f).sounds(BlockSoundGroup.BONE)));
+    public static final Block COCONUT = register("coconut", new CoconutFruitHarvestableBlock(FabricBlockSettings.of(Material.GOURD).strength(1.0f).sounds(BlockSoundGroup.BONE)));
     public static final Block COCONUT_OPEN = register("coconut_open", new CoconutOpenBlock(FabricBlockSettings.of(Material.GOURD).strength(0.8f).sounds(BlockSoundGroup.BONE)));
     public static final Block COCONUT_OPEN_EMPTY = register("coconut_open_empty", new CoconutEmptyBlock(FabricBlockSettings.of(Material.GOURD).strength(0.8f).sounds(BlockSoundGroup.BONE)));
 
