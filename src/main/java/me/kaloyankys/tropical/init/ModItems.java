@@ -15,7 +15,9 @@ Spawn Eggs
     public static final Item COCONUT_CRAB_SPAWN_EGG = register("coconut_crab_spawn_egg",
             new SpawnEggItem(ModEntities.COCONUT_CRAB, 0xc45741, 0xffa44a,
                     new FabricItemSettings().group(ItemGroup.DECORATIONS)));
-
+    public static final Item CHIMP_SPAWN_EGG = register("chimp_spawn_egg",
+            new SpawnEggItem(ModEntities.CHIMP, 0xc45741, 0xffa44a,
+                    new FabricItemSettings().group(ItemGroup.DECORATIONS)));
 
     public static Item register(String id, Item item) {
         Item Item = new Item(new Item.Settings().group(ItemGroup.DECORATIONS));

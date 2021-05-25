@@ -1,5 +1,6 @@
 package me.kaloyankys.tropical.client;
 
+import me.kaloyankys.tropical.entity.ChimpRenderer;
 import me.kaloyankys.tropical.entity.CocoCrabRenderer;
 import me.kaloyankys.tropical.init.ModBlocks;
 import me.kaloyankys.tropical.init.ModEntities;
@@ -14,10 +15,17 @@ import net.minecraft.client.render.RenderLayer;
 public class TropicalClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+
+
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(),
-                ModBlocks.FLOTSAM_GRASS, ModBlocks.COCONUT_OPEN, ModBlocks.COCONUT_LEAVES);
+                ModBlocks.FLOTSAM_GRASS, ModBlocks.COCONUT_OPEN, ModBlocks.COCONUT_LEAVES, ModBlocks.BANANA_LEAVES, ModBlocks.BANANA_VINE);
+
+
         EntityRendererRegistry.INSTANCE.register(ModEntities.COCONUT_CRAB, (dispatcher, context) -> {
             return new CocoCrabRenderer(dispatcher);
+        });
+        EntityRendererRegistry.INSTANCE.register(ModEntities.CHIMP, (dispatcher, context) -> {
+            return new ChimpRenderer(dispatcher);
         });
     }
 }

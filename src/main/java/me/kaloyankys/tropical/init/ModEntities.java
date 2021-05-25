@@ -1,5 +1,6 @@
 package me.kaloyankys.tropical.init;
 
+import me.kaloyankys.tropical.entity.ChimpEntity;
 import me.kaloyankys.tropical.entity.CocoCrabEntity;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
@@ -14,9 +15,16 @@ public class ModEntities {
             Registry.ENTITY_TYPE,
             new Identifier("tropical", "coconut_crab"),
             FabricEntityTypeBuilder.<CocoCrabEntity>create(SpawnGroup.CREATURE,
-            (t, w) -> new CocoCrabEntity(w)).dimensions(EntityDimensions.fixed(0.8F, 0.6F)).trackRangeBlocks(12).build());
+            (t, w) -> new CocoCrabEntity(w)).dimensions(EntityDimensions.fixed(0.8F, 0.8F)).trackRangeBlocks(12).build());
+    public static final EntityType<ChimpEntity> CHIMP = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier("tropical", "chimp"),
+            FabricEntityTypeBuilder.<ChimpEntity>create(SpawnGroup.CREATURE,
+                    (t, w) -> new ChimpEntity(w)).dimensions(EntityDimensions.fixed(1.0F, 2.2F)).trackRangeBlocks(12).build());
+
 
     public ModEntities() {
         FabricDefaultAttributeRegistry.register(COCONUT_CRAB, CocoCrabEntity.createMobAttributes());
+        FabricDefaultAttributeRegistry.register(CHIMP, ChimpEntity.createMobAttributes());
     }
 }

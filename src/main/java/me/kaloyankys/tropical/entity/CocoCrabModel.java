@@ -105,6 +105,7 @@ public class CocoCrabModel extends EntityModel<CocoCrabEntity> {
 		this.r_pincer.pitch = (-0.2F + 1.5F * MathHelper.method_24504(limbAngle, 13.0F)) * limbDistance;
 		this.l_pincer.pitch = (-0.2F + 1.5F * MathHelper.method_24504(limbAngle, 13.0F)) * limbDistance;
 		this.head.pitch = (-0.2F + 1.5F * MathHelper.method_24504(limbAngle, 13.0F)) * limbDistance;
+		this.body.pitch = (-0.2F + 0.5F * MathHelper.method_24504(limbAngle, 13.0F)) * limbDistance;
 	}
 
 	@Override

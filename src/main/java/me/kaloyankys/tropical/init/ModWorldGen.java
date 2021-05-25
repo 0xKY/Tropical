@@ -16,10 +16,12 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
+import net.minecraft.world.gen.foliage.JungleFoliagePlacer;
 import net.minecraft.world.gen.foliage.LargeOakFoliagePlacer;
 import net.minecraft.world.gen.placer.SimpleBlockPlacer;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.trunk.LargeOakTrunkPlacer;
+import net.minecraft.world.gen.trunk.MegaJungleTrunkPlacer;
 
 import java.util.OptionalInt;
 
@@ -30,6 +32,11 @@ public class ModWorldGen {
             (new SimpleBlockStateProvider(ModBlocks.TROPICAL_LOG.getDefaultState()), new SimpleBlockStateProvider(ModBlocks.COCONUT_LEAVES.getDefaultState()),
                     new LargeOakFoliagePlacer(UniformIntDistribution.of(1), UniformIntDistribution.of(2), 4),
                     new LargeOakTrunkPlacer(5, 10, 1),
+                    new TwoLayersFeatureSize(2, 0, 0, OptionalInt.of(3))).build()));
+    public static final ConfiguredFeature<TreeFeatureConfig, ?> BANANA_TREE = Feature.TREE.configure((new TreeFeatureConfig.Builder
+            (new SimpleBlockStateProvider(ModBlocks.TROPICAL_LOG.getDefaultState()), new SimpleBlockStateProvider(ModBlocks.BANANA_LEAVES.getDefaultState()),
+                    new JungleFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(2), 2),
+                    new MegaJungleTrunkPlacer(5, 10, 8),
                     new TwoLayersFeatureSize(2, 0, 0, OptionalInt.of(3))).build()));
 
     //Random Patches
@@ -43,6 +50,10 @@ public class ModWorldGen {
                 new Identifier("tropical", "coconut_tree"));
         Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, coconutTree.getValue(),  COCONUT_TREE);
         BiomeModifications.addFeature(BiomeSelectors.includeByKey(BiomeKeys.BEACH), GenerationStep.Feature.VEGETAL_DECORATION, coconutTree);
+        RegistryKey<ConfiguredFeature<?, ?>> bananaTree = RegistryKey.of(Registry.CONFIGURED_FEATURE_WORLDGEN,
+                new Identifier("tropical", "banana_tree"));
+        Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, bananaTree.getValue(),  BANANA_TREE);
+        BiomeModifications.addFeature(BiomeSelectors.includeByKey(BiomeKeys.JUNGLE), GenerationStep.Feature.VEGETAL_DECORATION, bananaTree);
 
         //Random Patches
         RegistryKey<ConfiguredFeature<?, ?>> flotsamGrassPatch = RegistryKey.of(Registry.CONFIGURED_FEATURE_WORLDGEN,
