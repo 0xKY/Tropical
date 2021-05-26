@@ -3,6 +3,7 @@ package me.kaloyankys.tropical.entity;
 import com.google.common.collect.Lists;
 import me.kaloyankys.tropical.init.ModBlocks;
 import me.kaloyankys.tropical.init.ModEntities;
+import me.kaloyankys.tropical.init.ModSoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
@@ -155,31 +156,31 @@ public class CocoCrabEntity extends AnimalEntity {
     @Override
     public AttributeContainer getAttributes() {
         if (attributeContainer == null)
-            attributeContainer = new AttributeContainer(MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0D).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25D).build());
+            attributeContainer = new AttributeContainer(MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0D).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25D).build());
         return attributeContainer;
     }
 
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
         if (!state.getMaterial().isLiquid()) {
-            playSound(SoundEvents.BLOCK_BAMBOO_HIT, 0.10F, 1.25F + random.nextFloat());
+            playSound(ModSoundEvents.CRAB_WALK, 0.10F, 1.25F + random.nextFloat());
             spawnSprintingParticles();
         }
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.BLOCK_BAMBOO_BREAK;
+        return ModSoundEvents.CRAB_DEATH;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.BLOCK_BAMBOO_BREAK;
+        return ModSoundEvents.CRAB_HURT;
     }
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.BLOCK_BAMBOO_BREAK;
+        return ModSoundEvents.CRAB_AMBIENT;
     }
 
     @Override

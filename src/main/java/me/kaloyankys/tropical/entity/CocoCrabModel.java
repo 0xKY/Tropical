@@ -27,8 +27,7 @@ public class CocoCrabModel extends EntityModel<CocoCrabEntity> {
 		textureWidth = 64;
 		textureHeight = 64;
 		l_leg = new ModelPart(this);
-		l_leg.setPivot(5.0F, 21.0F, 0.0F);
-		setRotationAngle(l_leg, 0.0F, 1.5708F, 0.0F);
+		l_leg.setPivot(0.0F, 21.0F, 5.0F);
 
 
 		cube_r1 = new ModelPart(this);
@@ -40,8 +39,7 @@ public class CocoCrabModel extends EntityModel<CocoCrabEntity> {
 		cube_r1.setTextureOffset(27, 34).addCuboid(-5.0F, -1.0F, -1.0F, 2.0F, 2.0F, 5.0F, 0.0F, false);
 
 		r_leg = new ModelPart(this);
-		r_leg.setPivot(-5.0F, 21.0F, 0.0F);
-		setRotationAngle(r_leg, 0.0F, 1.5708F, 0.0F);
+		r_leg.setPivot(0.0F, 21.0F, -5.0F);
 
 
 		cube_r2 = new ModelPart(this);
@@ -54,32 +52,26 @@ public class CocoCrabModel extends EntityModel<CocoCrabEntity> {
 
 		body = new ModelPart(this);
 		body.setPivot(0.0F, 20.0F, 0.0F);
-		setRotationAngle(body, 0.0F, 1.5708F, 0.0F);
 		body.setTextureOffset(0, 0).addCuboid(-5.0F, -3.0F, -6.0F, 10.0F, 6.0F, 12.0F, 0.0F, false);
 
 		r_pincer = new ModelPart(this);
-		r_pincer.setPivot(5.0F, 18.0F, -7.0F);
-		setRotationAngle(r_pincer, 0.0F, 1.5708F, 0.0F);
+		r_pincer.setPivot(6.0F, 18.0F, -5.0F);
 		r_pincer.setTextureOffset(18, 25).addCuboid(0.0F, 0.0F, -2.0F, 4.0F, 3.0F, 4.0F, 0.0F, false);
 
 		r_pincer_1 = new ModelPart(this);
-		r_pincer_1.setPivot(5.0F, 21.0F, -7.0F);
-		setRotationAngle(r_pincer_1, 0.0F, 1.5708F, 0.0F);
+		r_pincer_1.setPivot(6.0F, 21.0F, -5.0F);
 		r_pincer_1.setTextureOffset(32, 5).addCuboid(0.0F, 0.0F, -2.0F, 4.0F, 1.0F, 4.0F, 0.0F, false);
 
 		l_pincer = new ModelPart(this);
-		l_pincer.setPivot(-5.0F, 18.0F, -6.0F);
-		setRotationAngle(l_pincer, 0.0F, 1.5708F, 0.0F);
+		l_pincer.setPivot(7.0F, 18.0F, 5.0F);
 		l_pincer.setTextureOffset(22, 18).addCuboid(0.0F, 0.0F, -2.0F, 4.0F, 3.0F, 4.0F, 0.0F, false);
 
 		l_pincer_2 = new ModelPart(this);
-		l_pincer_2.setPivot(-5.0F, 21.0F, -6.0F);
-		setRotationAngle(l_pincer_2, 0.0F, 1.5708F, 0.0F);
+		l_pincer_2.setPivot(7.0F, 21.0F, 5.0F);
 		l_pincer_2.setTextureOffset(32, 0).addCuboid(0.0F, 0.0F, -2.0F, 4.0F, 1.0F, 4.0F, 0.0F, false);
 
 		head = new ModelPart(this);
-		head.setPivot(0.0F, 19.0F, -5.0F);
-		setRotationAngle(head, 0.0F, 1.5708F, 0.0F);
+		head.setPivot(5.0F, 19.0F, 0.0F);
 		head.setTextureOffset(0, 18).addCuboid(-2.0F, -1.0F, -3.0F, 5.0F, 4.0F, 6.0F, 0.0F, false);
 		head.setTextureOffset(6, 4).addCuboid(3.0F, -4.0F, -3.0F, 1.0F, 4.0F, 2.0F, 0.0F, false);
 		head.setTextureOffset(0, 4).addCuboid(3.0F, -4.0F, 1.0F, 1.0F, 4.0F, 2.0F, 0.0F, false);
@@ -90,7 +82,6 @@ public class CocoCrabModel extends EntityModel<CocoCrabEntity> {
 		setRotationAngle(cube_r3, -1.5708F, 0.0F, 0.0F);
 		cube_r3.setTextureOffset(0, 2).addCuboid(0.0F, 0.0F, -1.0F, 4.0F, 0.0F, 2.0F, 0.0F, false);
 	}
-
 	public void setAngles(CocoCrabEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
 
 		this.r_leg.pitch = -1.5F * MathHelper.method_24504(limbAngle, 13.0F) * limbDistance;

@@ -48,7 +48,7 @@ public class ModBlocks {
     /*
     Banana Trees
      */
-    public static final Block BANANA_LEAVES = register("banana_leaves", new BananaLeavesBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT).strength(0.3f)));
+    public static final Block BANANA_LEAVES = register("banana_leaves", new BananaLeavesBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT).strength(0.3f).nonOpaque().ticksRandomly()));
     public static final Block BANANA_VINE = register("banana_vine", new HangingVineBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT).strength(0.3f).collidable(false)));
 
     public static Block register(String id, Block block) {

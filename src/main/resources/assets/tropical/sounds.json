@@ -1,0 +1,26 @@
+{
+  "entity.coconut_crab.crab_ambient": {
+    "sounds": [
+      "tropical:entity/coconut_crab/crab_ambient"
+    ],
+    "subtitle": "subtitles.entity.tropical.coconut_crab.ambient"
+  },
+  "entity.coconut_crab.crab_walk": {
+    "sounds": [
+      "tropical:entity/coconut_crab/crab_walk"
+    ],
+    "subtitle": "subtitles.entity.tropical.coconut_crab.walk"
+  },
+  "entity.coconut_crab.crab_hurt": {
+    "sounds": [
+      "tropical:entity/coconut_crab/crab_hurt"
+    ],
+    "subtitle": "subtitles.entity.tropical.coconut_crab.hurt"
+  },
+  "entity.coconut_crab.crab_death": {
+    "sounds": [
+      "tropical:entity/coconut_crab/crab_death"
+    ],
+    "subtitle": "subtitles.entity.tropical.coconut_crab.death"
+  }
+}
