@@ -224,9 +224,9 @@ public class CocoCrabEntity extends AnimalEntity {
         {
             if(squaredDistanceTo(targetPos.getX() + 0.5F, targetPos.getY() + 0.5F, targetPos.getZ() + 0.5F) > 2F)
             {
-                getMoveControl().moveTo(targetPos.getX() + 0.5F, targetPos.getY() + 0.5F, targetPos.getZ() + 0.5F, 0.6F);
+                getMoveControl().moveTo(targetPos.getX() + 0.1F, targetPos.getY() + 0.8F, targetPos.getZ() + 0.1F, 0.1F);
             }
-            getLookControl().lookAt(targetPos.getX() + 0.5F, targetPos.getY() + 0.5F, targetPos.getZ() + 0.5F);
+            getLookControl().lookAt(targetPos.getX() + 1.0F, targetPos.getY() + 0.0F, targetPos.getZ() + 0.0F);
             {
                 BlockState st = world.getBlockState(targetPos);
                 if(st.isOf(ModBlocks.COCONUT))

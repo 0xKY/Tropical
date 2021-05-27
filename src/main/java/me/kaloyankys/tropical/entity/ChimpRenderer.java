@@ -19,12 +19,12 @@ public class ChimpRenderer extends MobEntityRenderer<ChimpEntity, ChimpModel> {
     @Override
     public void render(ChimpEntity chimp, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i)
     {
-        shadowRadius = 0.25F;
+        shadowRadius = 0.8F;
         matrixStack.push();
         if(chimp.isBaby())
         {
             matrixStack.scale(0.5F, 0.5F, 0.5F);
-            shadowRadius = 0.1F;
+            shadowRadius = 0.4F;
         }
 
         super.render(chimp, f, g, matrixStack, vertexConsumerProvider, i);

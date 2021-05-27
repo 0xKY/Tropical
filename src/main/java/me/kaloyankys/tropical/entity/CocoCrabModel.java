@@ -93,8 +93,8 @@ public class CocoCrabModel extends EntityModel<CocoCrabEntity> {
 	public void animateModel(CocoCrabEntity entity, float limbAngle, float limbDistance, float tickDelta) {
 		this.r_leg.pitch = -2.0F + 1.5F * MathHelper.method_24504(1.0F, 10.0F);
 		this.l_leg.pitch = -2.0F + 1.5F * MathHelper.method_24504(1.0F, 10.0F);
-		this.r_pincer.pitch = (-0.2F + 1.5F * MathHelper.method_24504(limbAngle, 13.0F)) * limbDistance;
-		this.l_pincer.pitch = (-0.2F + 1.5F * MathHelper.method_24504(limbAngle, 13.0F)) * limbDistance;
+		this.r_pincer.roll = (-0.2F + 1.5F * MathHelper.method_24504(limbAngle, 13.0F)) * limbDistance;
+		this.l_pincer.roll = (-0.2F + 1.5F * MathHelper.method_24504(limbAngle, 13.0F)) * limbDistance;
 		this.head.pitch = (-0.2F + 1.5F * MathHelper.method_24504(limbAngle, 13.0F)) * limbDistance;
 		this.body.pitch = (-0.2F + 0.5F * MathHelper.method_24504(limbAngle, 13.0F)) * limbDistance;
 	}

@@ -1,27 +1,29 @@
 package me.kaloyankys.tropical.entity;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import me.kaloyankys.tropical.init.ModBlocks;
 import me.kaloyankys.tropical.init.ModEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityDimensions;
-import net.minecraft.entity.EntityPose;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.TargetPredicate;
+import net.minecraft.entity.ai.brain.MemoryModuleType;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.mob.*;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
@@ -29,15 +31,19 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
+import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
 import java.util.List;
 
 public class ChimpEntity extends AnimalEntity {
+    public static Boolean EATING_BOOLEAN = false;
     public static final TrackedData<Boolean> EATING = DataTracker.registerData(ChimpEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     public static final TrackedData<Boolean> PASSIVE = DataTracker.registerData(ChimpEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     public Ingredient TEMPT_ITEM = Ingredient.ofItems(ModBlocks.BANANA_BUNCH);
@@ -48,6 +54,9 @@ public class ChimpEntity extends AnimalEntity {
 
     public ChimpEntity(World world) {
         super(ModEntities.CHIMP, world);
+        this.setCanPickUpLoot(true);
+        this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, 16.0F);
+        this.setPathfindingPenalty(PathNodeType.DAMAGE_FIRE, -1.0F);
     }
 
     @Override
@@ -55,7 +64,6 @@ public class ChimpEntity extends AnimalEntity {
         TEMPT_ITEM = Ingredient.ofItems(ModBlocks.BANANA_BUNCH);
 
         this.temptGoal = new TemptGoal(this, 0.7D, TEMPT_ITEM, false);
-
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, temptGoal);
         this.goalSelector.add(2, new EscapeDangerGoal(this, 1.25D));
@@ -66,7 +74,17 @@ public class ChimpEntity extends AnimalEntity {
         this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
         this.goalSelector.add(9, new LookAroundGoal(this));
     }
-
+    protected void initEquipment(LocalDifficulty difficulty) {
+        this.equipAtChance(EquipmentSlot.HEAD, new ItemStack(Items.GOLDEN_HELMET));
+        this.equipAtChance(EquipmentSlot.CHEST, new ItemStack(Items.GOLDEN_CHESTPLATE));
+            this.equipAtChance(EquipmentSlot.LEGS, new ItemStack(Items.GOLDEN_LEGGINGS));
+            this.equipAtChance(EquipmentSlot.FEET, new ItemStack(Items.GOLDEN_BOOTS));
+    }
+    private void equipAtChance(EquipmentSlot slot, ItemStack stack) {
+        if (this.world.random.nextFloat() < 0.1F) {
+            this.equipStack(slot, stack);
+        }
+    }
     @Override
     protected void initDataTracker() {
         super.initDataTracker();
@@ -74,11 +92,15 @@ public class ChimpEntity extends AnimalEntity {
         this.dataTracker.startTracking(PASSIVE, false);
     }
 
+
     @Override
-    public void onPlayerCollision(PlayerEntity player) {
-        this.dealDamage(this, player);
-        dataTracker.set(PASSIVE, false);
+    public void setAttacking(@Nullable PlayerEntity attacking) {
+        if (!this.getDataTracker().get(PASSIVE)) {
+            LivingEntity entity = world.getClosestEntity(ChimpEntity.class, TargetPredicate.DEFAULT, this, 1.0, 1.0, 1.0, Box.method_30048(10.0f, 10.0f, 10.0f));
+            this.attackLivingEntity(entity);
+        }
     }
+
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         ItemStack itemStack = player.getStackInHand(hand);
@@ -89,13 +111,14 @@ public class ChimpEntity extends AnimalEntity {
             }
         } else {
             if (item.isFood() && this.isBreedingItem(itemStack) && this.getHealth() < this.getMaxHealth()) {
-                    this.eat(player, itemStack);
-                    this.heal((float) item.getFoodComponent().getHunger());
-                    return ActionResult.CONSUME;
+                this.eat(player, itemStack);
+                this.heal((float) item.getFoodComponent().getHunger());
+                return ActionResult.CONSUME;
             } else if (this.isBreedingItem(itemStack)) {
                 this.eat(player, itemStack);
                 if (this.random.nextInt(3) == 0) {
                     dataTracker.set(PASSIVE, true);
+                    ItemScatterer.spawn(world, player.getPos().getX() + random.nextInt(5), player.getPos().getY(),player.getPos().getZ() + random.nextInt(5), new ItemStack(Items.STONE_BRICK_WALL));
                     this.world.sendEntityStatus(this, (byte) 7);
                 } else {
                     this.world.sendEntityStatus(this, (byte) 6);
@@ -103,10 +126,8 @@ public class ChimpEntity extends AnimalEntity {
                 this.setPersistent();
                 return ActionResult.CONSUME;
             }
-        }
-        return super.interactMob(player, hand);
+        } return super.interactMob(player, hand);
     }
-
     @Override
     public boolean isInvulnerableTo(DamageSource damageSource) {
         if (damageSource == DamageSource.DROWN) return true;
@@ -246,7 +267,7 @@ public class ChimpEntity extends AnimalEntity {
         public boolean shouldContinue()
         {
             BlockState st = world.getBlockState(targetPos);
-            if(!st.isOf(ModBlocks.COCONUT)) return false;
+            if(!st.isOf(ModBlocks.BANANA_BUNCH)) return false;
 
             return squaredDistanceTo(targetPos.getX() + 0.5F, targetPos.getY() + 0.5F, targetPos.getZ() + 0.5F) <= 2;
         }
@@ -255,6 +276,7 @@ public class ChimpEntity extends AnimalEntity {
         public void start()
         {
             dataTracker.set(EATING, true);
+            EATING_BOOLEAN = true;
             eatTime = 40 + random.nextInt(40);
         }
 
@@ -262,6 +284,7 @@ public class ChimpEntity extends AnimalEntity {
         public void stop()
         {
             dataTracker.set(EATING, false);
+            EATING_BOOLEAN = false;
         }
 
         private BlockPos findBanana()
@@ -276,7 +299,7 @@ public class ChimpEntity extends AnimalEntity {
                 {
                     m.set(x, startPos.getY(), z);
                     BlockState checkState = world.getBlockState(m);
-                    if(checkState.isOf(ModBlocks.COCONUT))
+                    if(checkState.isOf(ModBlocks.BANANA_BUNCH))
                     {
                         spots.add(new BlockPos(m.getX(), m.getY(), m.getZ()));
                     }
