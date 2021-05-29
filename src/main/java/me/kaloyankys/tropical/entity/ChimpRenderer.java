@@ -3,6 +3,8 @@ package me.kaloyankys.tropical.entity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.MobEntityRenderer;
+import net.minecraft.client.render.entity.feature.ArmorFeatureRenderer;
+import net.minecraft.client.render.entity.feature.HeldItemFeatureRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
@@ -15,6 +17,9 @@ public class ChimpRenderer extends MobEntityRenderer<ChimpEntity, ChimpModel> {
     @Override
     public Identifier getTexture(ChimpEntity entity) {
         return new Identifier("tropical", "textures/entity/chimp/chimp.png");
+    }
+    public void renderChimp() {
+        this.addFeature(new HeldItemFeatureRenderer(this));
     }
     @Override
     public void render(ChimpEntity chimp, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i)
@@ -31,5 +36,4 @@ public class ChimpRenderer extends MobEntityRenderer<ChimpEntity, ChimpModel> {
 
         matrixStack.pop();
     }
-
 }

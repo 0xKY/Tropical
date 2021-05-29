@@ -3,11 +3,10 @@ package me.kaloyankys.tropical.entity;
 import com.google.common.collect.Lists;
 import me.kaloyankys.tropical.init.ModBlocks;
 import me.kaloyankys.tropical.init.ModEntities;
+import me.kaloyankys.tropical.init.ModItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityDimensions;
-import net.minecraft.entity.EntityPose;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.AttributeContainer;
@@ -18,10 +17,12 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.DolphinEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
@@ -29,6 +30,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
@@ -40,7 +42,7 @@ import java.util.List;
 public class ChimpEntity extends AnimalEntity {
     public static final TrackedData<Boolean> EATING = DataTracker.registerData(ChimpEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     public static final TrackedData<Boolean> PASSIVE = DataTracker.registerData(ChimpEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-    public Ingredient TEMPT_ITEM = Ingredient.ofItems(ModBlocks.BANANA_BUNCH);
+    public Ingredient TEMPT_ITEM = Ingredient.ofItems(ModItems.BANANA);
     private AttributeContainer attributeContainer;
     private int eatCooldown = 100;
     public int eatTime = 0;
@@ -52,7 +54,7 @@ public class ChimpEntity extends AnimalEntity {
 
     @Override
     protected void initGoals() {
-        TEMPT_ITEM = Ingredient.ofItems(ModBlocks.BANANA_BUNCH);
+        TEMPT_ITEM = Ingredient.ofItems(ModItems.BANANA);
 
         this.temptGoal = new TemptGoal(this, 0.7D, TEMPT_ITEM, false);
 
@@ -66,7 +68,6 @@ public class ChimpEntity extends AnimalEntity {
         this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
         this.goalSelector.add(9, new LookAroundGoal(this));
     }
-
     @Override
     protected void initDataTracker() {
         super.initDataTracker();
@@ -82,10 +83,12 @@ public class ChimpEntity extends AnimalEntity {
                 return ActionResult.SUCCESS;
             }
         } else {
-            if (item.isFood() && this.isBreedingItem(itemStack) && this.getHealth() < this.getMaxHealth()) {
-                this.eat(player, itemStack);
-                this.heal((float) item.getFoodComponent().getHunger());
-                return ActionResult.CONSUME;
+            if (dataTracker.get(PASSIVE)) {
+                if (item.isFood() && this.isBreedingItem(itemStack) && this.getHealth() < this.getMaxHealth()) {
+                    this.eat(player, itemStack);
+                    this.heal((float) item.getFoodComponent().getHunger());
+                    return ActionResult.CONSUME;
+                }
             } else if (this.isBreedingItem(itemStack)) {
                 this.eat(player, itemStack);
                 if (this.random.nextInt(3) == 0) {
@@ -155,7 +158,7 @@ public class ChimpEntity extends AnimalEntity {
     @Override
     public AttributeContainer getAttributes() {
         if (attributeContainer == null)
-            attributeContainer = new AttributeContainer(MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0D).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25D).build());
+            attributeContainer = new AttributeContainer(MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0D).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25D).build());
         return attributeContainer;
     }
 
@@ -231,7 +234,7 @@ public class ChimpEntity extends AnimalEntity {
                 if(st.isOf(ModBlocks.BANANA_BUNCH))
                 {
                     world.breakBlock(targetPos, false);
-                    world.setBlockState(targetPos, Blocks.AIR.getDefaultState());
+                    ItemScatterer.spawn(world, 0.1, 0.1, 0.1, new ItemStack(ModItems.BANANA, random.nextInt(5)));
                 }
             }
         }

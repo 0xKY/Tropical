@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "tropical:block/banana_vine"
+    "layer0": "tropical:item/gilded_banana"
   }
 }

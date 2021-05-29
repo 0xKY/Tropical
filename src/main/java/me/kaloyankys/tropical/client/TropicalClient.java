@@ -18,7 +18,7 @@ public class TropicalClient implements ClientModInitializer {
 
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(),
-                ModBlocks.FLOTSAM_GRASS, ModBlocks.COCONUT_OPEN, ModBlocks.COCONUT_LEAVES, ModBlocks.BANANA_LEAVES, ModBlocks.BANANA_VINE);
+                ModBlocks.FLOTSAM_GRASS, ModBlocks.COCONUT_OPEN, ModBlocks.COCONUT_LEAVES, ModBlocks.BANANA_LEAVES);
 
 
         EntityRendererRegistry.INSTANCE.register(ModEntities.COCONUT_CRAB, (dispatcher, context) -> {

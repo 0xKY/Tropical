@@ -6,11 +6,12 @@
 
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
 
-public class ChimpModel extends EntityModel<ChimpEntity> {
+public class ChimpModel extends BipedEntityModel<ChimpEntity> {
 private final ModelPart body;
 	private final ModelPart head;
 	private final ModelPart arm0;
@@ -18,7 +19,8 @@ private final ModelPart body;
 	private final ModelPart leg0;
 	private final ModelPart leg1;
 public ChimpModel() {
-		textureWidth = 128;
+	super(1.0f);
+	textureWidth = 128;
 		textureHeight = 128;
 		body = new ModelPart(this);
 		body.setPivot(0.0F, -7.0F, 0.0F);

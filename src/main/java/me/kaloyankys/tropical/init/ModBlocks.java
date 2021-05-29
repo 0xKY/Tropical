@@ -44,12 +44,7 @@ public class ModBlocks {
      */
     public static final Block BANANA_BUNCH = register("banana_bunch", new Block(FabricBlockSettings.of(Material.ORGANIC_PRODUCT).strength(0.3f)));
     public static final Block PLANTAIN_BUNCH = register("plantain_bunch", new Block(FabricBlockSettings.of(Material.ORGANIC_PRODUCT).strength(0.3f)));
-
-    /*
-    Banana Trees
-     */
     public static final Block BANANA_LEAVES = register("banana_leaves", new BananaLeavesBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT).strength(0.3f).nonOpaque().ticksRandomly()));
-    public static final Block BANANA_VINE = register("banana_vine", new HangingVineBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT).strength(0.3f).collidable(false)));
 
     public static Block register(String id, Block block) {
         Item blockItem = new BlockItem(block, new Item.Settings().group(ItemGroup.DECORATIONS));

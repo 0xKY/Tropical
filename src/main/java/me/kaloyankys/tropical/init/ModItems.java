@@ -10,8 +10,16 @@ import net.minecraft.util.registry.Registry;
 public class ModItems {
 
     /*
-Spawn Eggs
- */
+    Bananas / Plantains
+     */
+    public static final Item BANANA = register("banana", new Item(new FabricItemSettings().food(ModFoodComponents.BANANA)));
+    public static final Item GILDED_BANANA = register("gilded_banana", new Item(new FabricItemSettings().food(ModFoodComponents.GILDED_BANANA)));
+    public static final Item PLANTAIN = register("plantain", new Item(new FabricItemSettings()));
+    public static final Item COOKED_PLANTAIN = register("cooked_plantain", new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_PLANTAIN)));
+
+    /*
+    Spawn Eggs
+    */
     public static final Item COCONUT_CRAB_SPAWN_EGG = register("coconut_crab_spawn_egg",
             new SpawnEggItem(ModEntities.COCONUT_CRAB, 0xc45741, 0xffa44a,
                     new FabricItemSettings().group(ItemGroup.DECORATIONS)));

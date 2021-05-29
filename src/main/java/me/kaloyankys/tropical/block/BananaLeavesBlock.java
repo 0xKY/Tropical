@@ -20,8 +20,8 @@ public class BananaLeavesBlock extends LeavesBlock {
     }
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (random.nextInt(100) == 0 && world.getBlockState(pos.offset(Direction.Axis.Y, -1)) == (BlockState) Blocks.AIR.getDefaultState()) {
-            world.setBlockState(pos.down(), (BlockState) ModBlocks.BANANA_VINE.getDefaultState());
+        if (random.nextInt(50) == 0 && world.getBlockState(pos.offset(Direction.Axis.Y, -1)) == (BlockState) Blocks.AIR.getDefaultState()) {
+            world.setBlockState(pos.down(), (BlockState) ModBlocks.BANANA_BUNCH.getDefaultState());
         }
     }
 }
