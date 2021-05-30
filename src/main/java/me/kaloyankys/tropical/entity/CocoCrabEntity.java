@@ -35,7 +35,7 @@ import net.minecraft.world.WorldAccess;
 import java.util.EnumSet;
 import java.util.List;
 
-public class CocoCrabEntity extends TameableShoulderEntity {
+public class CocoCrabEntity extends AnimalEntity {
     public static final TrackedData<Boolean> EATING = DataTracker.registerData(CocoCrabEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     public static final TrackedData<Boolean> PASSIVE = DataTracker.registerData(CocoCrabEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     public Ingredient TEMPT_ITEM = Ingredient.ofItems(ModBlocks.COCONUT);
@@ -56,7 +56,6 @@ public class CocoCrabEntity extends TameableShoulderEntity {
 
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, temptGoal);
-        this.goalSelector.add(2, new SitOnOwnerShoulderGoal(this));
         this.goalSelector.add(3, new EscapeDangerGoal(this, 1.25D));
         this.goalSelector.add(4, new AnimalMateGoal(this, 1.0D));
         this.goalSelector.add(5, new FleeEntityGoal<>(this, PlayerEntity.class, 16.0F, 1.6D, 1.4D, (livingEntity) -> !isPassive()));
@@ -67,12 +66,6 @@ public class CocoCrabEntity extends TameableShoulderEntity {
         this.goalSelector.add(9, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
         this.goalSelector.add(10, new LookAroundGoal(this));
     }
-
-    @Override
-    public boolean isReadyToSitOnPlayer() {
-        return true;
-    }
-
     @Override
     protected void initDataTracker() {
         super.initDataTracker();
@@ -93,14 +86,12 @@ public class CocoCrabEntity extends TameableShoulderEntity {
                 if (item.isFood() && this.isBreedingItem(itemStack) && this.getHealth() < this.getMaxHealth()) {
                     this.eat(player, itemStack);
                     this.heal((float) item.getFoodComponent().getHunger());
-                    this.setTamed(true);
                     return ActionResult.CONSUME;
                 }
             } else if (this.isBreedingItem(itemStack)) {
                 this.eat(player, itemStack);
                 if (this.random.nextInt(3) == 0) {
                     dataTracker.set(PASSIVE, true);
-                    this.setTamed(true);
                     this.world.sendEntityStatus(this, (byte) 7);
                 } else {
                     this.world.sendEntityStatus(this, (byte) 6);

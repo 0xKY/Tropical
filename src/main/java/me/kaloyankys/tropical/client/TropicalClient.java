@@ -2,6 +2,7 @@ package me.kaloyankys.tropical.client;
 
 import me.kaloyankys.tropical.entity.ChimpRenderer;
 import me.kaloyankys.tropical.entity.CocoCrabRenderer;
+import me.kaloyankys.tropical.entity.ToucanRenderer;
 import me.kaloyankys.tropical.init.ModBlocks;
 import me.kaloyankys.tropical.init.ModEntities;
 import net.fabricmc.api.ClientModInitializer;
@@ -26,6 +27,9 @@ public class TropicalClient implements ClientModInitializer {
         });
         EntityRendererRegistry.INSTANCE.register(ModEntities.CHIMP, (dispatcher, context) -> {
             return new ChimpRenderer(dispatcher);
+        });
+        EntityRendererRegistry.INSTANCE.register(ModEntities.TOUCAN, (dispatcher, context) -> {
+            return new ToucanRenderer(dispatcher);
         });
     }
 }
