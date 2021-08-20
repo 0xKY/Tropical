@@ -6,12 +6,11 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 
 import java.util.Random;
 
-public class CoconutLeavesBlock extends LeavesBlock {
-    public CoconutLeavesBlock(Settings settings) {
+public class CoconutPalmCrownBlock extends LeavesBlock {
+    public CoconutPalmCrownBlock(Settings settings) {
         super(settings);
     }
     @Override
@@ -20,7 +19,11 @@ public class CoconutLeavesBlock extends LeavesBlock {
     }
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (random.nextInt(100) == 0 && world.getBlockState(pos.offset(Direction.Axis.Y, -1)) == (BlockState) Blocks.AIR.getDefaultState()) {
+        if (random.nextInt(100) == 0 &&
+                world.getBlockState(pos.east()) == (BlockState) Blocks.AIR.getDefaultState() ||
+                world.getBlockState(pos.west()) == (BlockState) Blocks.AIR.getDefaultState() ||
+                world.getBlockState(pos.south()) == (BlockState) Blocks.AIR.getDefaultState() ||
+                world.getBlockState(pos.north()) == (BlockState) Blocks.AIR.getDefaultState()) {
             world.setBlockState(pos.down(), (BlockState) ModBlocks.COCONUT_FRUIT.getDefaultState());
         }
     }

@@ -3,13 +3,10 @@ package me.kaloyankys.tropical.block.coconut;
 import me.kaloyankys.tropical.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
 
 import java.util.Random;
 
@@ -19,7 +16,6 @@ public class CoconutFruitBlock extends Block {
         super(settings);
     }
 
-    public static final VoxelShape SHAPE = Block.createCuboidShape(4D, 8D, 4D, 12D, 16D, 12D);
     public static final IntProperty AGE = IntProperty.of("age", 0, 2);
 
     @Override
@@ -41,9 +37,5 @@ public class CoconutFruitBlock extends Block {
         if (i == 2) {
             world.setBlockState(pos, (BlockState) ModBlocks.COCONUT.getDefaultState());
         }
-    }
-    @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return SHAPE;
     }
 }

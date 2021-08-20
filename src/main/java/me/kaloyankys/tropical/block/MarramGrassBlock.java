@@ -7,8 +7,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 
-public class FlotsamGrassBlock extends PlantBlock {
-    public FlotsamGrassBlock(Settings settings) {
+public class MarramGrassBlock extends PlantBlock {
+    public MarramGrassBlock(Settings settings) {
         super(settings);
     }
 

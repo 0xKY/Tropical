@@ -16,15 +16,13 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
-import net.minecraft.entity.passive.TameableShoulderEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -84,12 +82,12 @@ public class CocoCrabEntity extends AnimalEntity {
         } else {
             if (dataTracker.get(PASSIVE)) {
                 if (item.isFood() && this.isBreedingItem(itemStack) && this.getHealth() < this.getMaxHealth()) {
-                    this.eat(player, itemStack);
+                    this.eat(player, hand, itemStack);
                     this.heal((float) item.getFoodComponent().getHunger());
                     return ActionResult.CONSUME;
                 }
             } else if (this.isBreedingItem(itemStack)) {
-                this.eat(player, itemStack);
+                this.eat(player, hand, itemStack);
                 if (this.random.nextInt(3) == 0) {
                     dataTracker.set(PASSIVE, true);
                     this.world.sendEntityStatus(this, (byte) 7);
@@ -141,15 +139,15 @@ public class CocoCrabEntity extends AnimalEntity {
     }
 
     @Override
-    public void writeCustomDataToTag(CompoundTag tag) {
-        super.writeCustomDataToTag(tag);
+    public void writeCustomDataToNbt(NbtCompound tag) {
+        super.writeCustomDataToNbt(tag);
         tag.putBoolean("Passive", isPassive());
         tag.putInt("EatCooldown", eatCooldown);
     }
 
     @Override
-    public void readCustomDataFromTag(CompoundTag tag) {
-        super.readCustomDataFromTag(tag);
+    public void readCustomDataFromNbt(NbtCompound tag) {
+        super.readCustomDataFromNbt(tag);
         setPassive(tag.getBoolean("Passive"));
         eatCooldown = tag.getInt("EatCooldown");
     }

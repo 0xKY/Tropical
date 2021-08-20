@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "tropical:block/banana_bunch"
+    "all": "tropical:block/coco_fruit_mature"
   }
 }

@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class CoconutSaplingGenerator extends SaplingGenerator {
     @Override
-    protected ConfiguredFeature<TreeFeatureConfig, ?> createTreeFeature(Random random, boolean bl) {
-        return ModWorldGen.COCONUT_TREE;
+    protected ConfiguredFeature<TreeFeatureConfig, ?> getTreeFeature(Random random, boolean bl) {
+        return (ConfiguredFeature<TreeFeatureConfig, ?>) ModWorldGen.COCONUT_TREE.getConfig();
     }
 }

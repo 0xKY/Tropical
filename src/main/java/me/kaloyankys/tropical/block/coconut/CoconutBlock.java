@@ -2,6 +2,7 @@ package me.kaloyankys.tropical.block.coconut;
 
 import me.kaloyankys.tropical.init.ModBlocks;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.FallingBlock;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -17,8 +18,8 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class CoconutFruitHarvestableBlock extends CoconutEmptyBlock {
-    public CoconutFruitHarvestableBlock(Settings settings) {
+public class CoconutBlock extends FallingBlock {
+    public CoconutBlock(Settings settings) {
         super(settings);
     }
 

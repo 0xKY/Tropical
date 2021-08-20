@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column",
   "textures": {
-    "end": "tropical:block/coconut_top",
+    "end": "tropical:block/coconut_top_open_empty",
     "side": "tropical:block/coconut"
   }
 }

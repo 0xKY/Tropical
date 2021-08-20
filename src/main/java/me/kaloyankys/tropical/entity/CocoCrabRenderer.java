@@ -1,15 +1,16 @@
 package me.kaloyankys.tropical.entity;
 
+import me.kaloyankys.tropical.client.TropicalClient;
 import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.entity.EntityRenderDispatcher;
+import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
 public class CocoCrabRenderer extends MobEntityRenderer<CocoCrabEntity, CocoCrabModel> {
 
-    public CocoCrabRenderer(EntityRenderDispatcher entityRenderDispatcher) {
-        super(entityRenderDispatcher, new CocoCrabModel(), 0.5f);
+    public CocoCrabRenderer(EntityRendererFactory.Context context) {
+        super(context, new CocoCrabModel(context.getPart(TropicalClient.CRAB_LAYER)), 0.5f);
     }
 
     @Override
