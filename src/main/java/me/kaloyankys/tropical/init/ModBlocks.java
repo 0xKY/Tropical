@@ -27,7 +27,8 @@ public class ModBlocks {
     Coconut Trees
      */
     public static final Block COCONUT_PALM_WOOD = register("coconut_palm_wood", new PillarBlock(FabricBlockSettings.of(Material.WOOD).strength(0.8f)));
-    public static final Block COCONUT_PALM_CROWN = register("coconut_palm_crown", new CoconutPalmCrownBlock(FabricBlockSettings.of(Material.LEAVES).strength(0.2f).nonOpaque().ticksRandomly()));
+    public static final Block COCONUT_PALM_CROWN = register("coconut_palm_crown", new PalmCrownBlock(FabricBlockSettings.of(Material.LEAVES).strength(0.2f).nonOpaque().ticksRandomly()));
+    public static final Block COCONUT_PALM_FROND = register("coconut_palm_frond", new FrondBlock(FabricBlockSettings.of(Material.LEAVES).strength(0.2f).nonOpaque().ticksRandomly()));
     /*
     Flotsam
      */
